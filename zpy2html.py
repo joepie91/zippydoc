@@ -87,6 +87,16 @@ template = """
 				font-weight: normal;
 				margin-left: 8px;
 			}
+			
+			dd > .children
+			{
+				font-size: 95%%;
+			}
+			
+			dd > .children > dl > dd
+			{
+				margin-left: 13px;
+			}
 
 			.exclamation
 			{
@@ -254,7 +264,7 @@ class Argument(TreeLevel):
 		self.data = data
 	
 	def render(self):
-		return '<dl><dt>%s</dt><dd>%s</dd></dl>' % (self.argname, self.process_inline_markup(self.data))
+		return '<dl><dt>%s</dt><dd>%s%s</dd></dl>' % (self.argname, self.process_inline_markup(self.data), self.render_children())
 	
 class Header(TreeLevel):
 	def __init__(self, indentation, data, depth):
