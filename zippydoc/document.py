@@ -1,7 +1,7 @@
 import re
 import block_markup
 
-class Document():
+class Document(object):
 	def __init__(self, data):
 		self.data = data
 		self._parse()

@@ -1,4 +1,4 @@
-class TransformationRuleset():
+class TransformationRuleset(object):
 	def transform_children(self, text):
 		pass
 		

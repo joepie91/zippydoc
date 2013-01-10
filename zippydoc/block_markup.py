@@ -1,7 +1,7 @@
 import re
 from value import Value
 
-class TreeLevel:
+class TreeLevel(object):
 	def __init__(self, indentation, data):
 		self.elements = []
 		self.indentation = indentation
