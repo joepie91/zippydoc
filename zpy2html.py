@@ -82,7 +82,7 @@ class HtmlRuleset(zippydoc.TransformationRuleset):
 			description = item[1]
 			
 			if len(description) > 80:
-				matches = re.match("^(.{0,80})\W", data)					
+				matches = re.match("^(.{0,80})\W", description)					
 				description = matches.group(1) + "..."
 			
 			description = zippydoc.Value(description).transform(self)
