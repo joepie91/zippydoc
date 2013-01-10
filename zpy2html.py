@@ -9,9 +9,91 @@ parser.add_argument('files', metavar='FILE', type=str, nargs='+',
 args = parser.parse_args()
 options = vars(args)
 
+class HtmlRuleset(zippydoc.TransformationRuleset):
+	def create_anchor(self, title):
+		anchor = title.clean().replace("...", "").replace(".", "_")
+		anchor = re.sub("[^a-zA-Z0-9_]", "", anchor)
+		return anchor
+		
+	def escape_html(self, text):
+		return text.replace("<", "&lt;").replace(">", "&gt;")
+	
+	def transform_children(self, text):
+		return '<div class="children">%s</div>' % text
+	
+	def transform_header(self, depth, text):
+		if depth <= 7:
+			title_type = "h%d" % depth
+		else:
+			title_type = "h7"
+			
+		return "<%s>%s</%s>" % (title_type, text.transform(self), title_type)
+	
+	def transform_definition(self, forms, children):
+		anchor = self.create_anchor(forms[0])
+		formlist = "<br>".join([form.transform(self) for form in forms])
+		return '<div class="definition"><a name="%s">%s %s</a></div>' % (anchor, formlist, children)
+		
+	def transform_argument(self, name, description, children):
+		return "<dl><dt>%s</dt><dd>%s%s</dd></dl>" % (name, description.transform(self), children)
+	
+	def transform_example(self, title, children):
+		return '<div class="example">Example: %s %s</div>' % (title.transform(self), children)
+	
+	def transform_code(self, text):
+		return '<h7>Code:</h7><pre class="code">%s</pre>' % self.escape_html(text)
+		
+	def transform_output(self, text):
+		return '<h7>Output:</h7><pre class="output">%s</pre>' % self.escape_html(text)
+		
+	def transform_exclamation(self, text, children):
+		return '<div class="exclamation"><strong>Important:</strong> %s %s</div>' % (text.transform(self), children)
+	
+	def transform_text(self, text):
+		return '<div class="text">%s</div>' % text.transform(self)
+		
+	def transform_reference(self, target, description):
+		return '<a href="%s.html">%s</a>' % (target, description.transform(self))
+	
+	def transform_external_reference(self, target, description):
+		return '<a href="%s">%s</a>' % (target, description.transform(self))
+		
+	def transform_fixed_width(self, text):
+		return '<span class="fixed">%s</span>' % text
+		
+	def transform_emphasis(self, text):
+		return "<em>%s</em>" % text.transform(self)
+		
+	def transform_strong(self, text):
+		return "<strong>%s</strong>" % text.transform(self)
+		
+	def transform_toc(self, items):
+		rendered = ""
+		
+		for item in items:
+			forms = item[0].get_forms()
+			anchor = self.create_anchor(forms[0])
+			
+			if len(forms) > 1:
+				alternatives = '<span class="alternatives">(also: %s)</span>' % ", ".join(form.clean() for form in forms[1:])
+			else:
+				alternatives = ""
+				
+			description = item[1]
+			
+			if len(description) > 80:
+				matches = re.match("^(.{0,80})\W", data)					
+				description = matches.group(1) + "..."
+			
+			description = zippydoc.Value(description).transform(self)
+			
+			rendered += '<li><a href="#%s">%s</a> %s %s</li>' % (anchor, forms[0].clean(), description, alternatives)
+		
+		return '<div class="toc"><h2>Table of contents</h2><ul>%s</ul></div>' % rendered
+
 files = options["files"]
 
-docparser = zippydoc.Parser(open("template.html").read())
+template = open("template.html").read()
 
 for zpy in files:
 	destination = os.path.splitext(zpy)[0] + ".html"
@@ -20,10 +102,12 @@ for zpy in files:
 	data = f.read()
 	f.close()
 	
-	rendered = docparser.render(data)
+	doc = zippydoc.Document(open(zpy, "r").read())
+	
+	rendered = doc.transform(HtmlRuleset())
 	
 	f = open(destination, "w")
-	f.write(rendered)
+	f.write(template.replace("{CONTENT}", rendered))
 	f.close()
 	
 	print "Rendered %s" % destination
