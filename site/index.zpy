@@ -1,0 +1,60 @@
+# ZippyDoc
+
+Hi, this is the website of ZippyDoc, a compact, light-weight and human-readable format for documenting code, APIs, and other things, that can be easily converted to HTML.
+
+It is designed primarily to be simple to use (unlike complex markup languages like reStructuredText), and very code-oriented (unlike other simple markup languages like Markdown).
+You will probably learn the entire syntax in about 10 minutes.
+
+ZippyDoc (both the format and the parser) are licensed under the {http://www.wtfpl.net/}(WTFPL), meaning you can basically do with it whatever you want, and reuse it in any
+fashion you see fit. I hope it will help you write nicer, easier, and more complete documentation!
+
+While ZippyDoc is technically intended for documentation, I decided to whip up a simple index page in ZippyDoc as well - you're looking at it! :)
+
+## What does the ZippyDoc format look like?
+
+$ ^ my_function(argument1, argument2)
+
+$$	! This is just an example!
+
+$$	This is a function.
+
+$$	argument1::
+		This is the first argument.
+		
+$$	argument2::
+		This is the second argument.
+		
+$$	@ How to call my_function
+
+$$		$ my_function("ZippyDoc", "awesome")
+
+$$		> "ZippyDoc is awesome!"
+
+####### Result:
+
+^ my_function(argument1, argument2)
+
+	! This is just an example!
+
+	This is a function.
+
+	argument1::
+		This is the first argument.
+		
+	argument2::
+		This is the second argument.
+		
+	@ How to call my_function
+
+		$ my_function("ZippyDoc", "awesome")
+
+		> "ZippyDoc is awesome!"
+
+## Documentation
+
+The documentation for ZippyDoc can be found {>documentation}(here).
+
+## Downloading ZippyDoc
+
+ZippyDoc is now a PyPi package! To install it, make sure you have pip installed, and run `pip install zippydoc`. You can then use the `zpy2html` command
+anywhere, to convert your ZippyDoc source files to HTML. The GitHub repository can be found {https://github.com/joepie91/ZippyDoc}(here).
