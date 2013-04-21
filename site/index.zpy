@@ -56,7 +56,5 @@ The documentation for ZippyDoc can be found {>documentation}(here).
 
 ## Downloading ZippyDoc
 
-ZippyDoc is still in a pretty messy stage, but it should already work reliably according to the current documentation. GitHub repository is coming soon, until that time you can
-{<zpy2html.py}(download the conversion script here). It's a Python script, so you'll need a Python interpreter of some sort. No dependencies are necessary, it only uses standard
-library functionality. Simply run it with all files you wish to convert as arguments, and it will convert each of them into a file with the same name, but a **.html** extension
-instead of the original extension. It's strongly recommended to name your ZippyDoc source files with the **.zpy** extension.
+ZippyDoc is now a PyPi package! To install it, make sure you have pip installed, and run `pip install zippydoc`. You can then use the `zpy2html` command
+anywhere, to convert your ZippyDoc source files to HTML. The GitHub repository can be found {https://github.com/joepie91/ZippyDoc}(here).
