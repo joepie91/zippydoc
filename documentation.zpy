@@ -286,7 +286,7 @@ There are also various forms of inline markup that you can use in your documenta
 	
 		$ You could also search {http://www.google.com/}.
 		
-	@ Referencing another documentation page with a friendly description
+	@ Referencing Google with a friendly description
 	
 		$ You could also search {http://www.google.com/}(Google).
 		
