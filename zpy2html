@@ -111,7 +111,7 @@ for zpy in files:
 	data = f.read()
 	f.close()
 	
-	doc = zippydoc.Document(open(zpy, "r").read())
+	doc = zippydoc.Document(data)
 	
 	rendered = doc.transform(HtmlRuleset())
 	
