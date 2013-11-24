@@ -25,6 +25,9 @@ class TransformationRuleset(object):
 	
 	def transform_text(self, text):
 		pass
+	
+	def transform_list(self, items):
+		pass
 		
 	def transform_reference(self, target, description):
 		pass

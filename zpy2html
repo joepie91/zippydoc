@@ -60,6 +60,9 @@ class HtmlRuleset(zippydoc.TransformationRuleset):
 	
 	def transform_text(self, text):
 		return '<div class="text">%s</div>' % text.transform(self)
+	
+	def transform_list(self, items):
+		return '<ul>%s</ul>' % "".join("<li>%s</li>" % item.transform(self) for item in items)
 		
 	def transform_reference(self, target, description):
 		return '<a href="%s.html">%s</a>' % (target, description.transform(self))

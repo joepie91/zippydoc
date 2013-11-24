@@ -33,7 +33,7 @@ print repr(package_data)
 
 setup(
   name='zippydoc',
-  version='1.0',
+  version='1.1',
   maintainer='Sven Slootweg',
   maintainer_email='admin@cryto.net',
   description='Documentation markup language and library, including HTML converter.',

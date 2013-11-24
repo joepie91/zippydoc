@@ -63,6 +63,9 @@ class Document(object):
 				# Exclamation
 				lines[0] = lines[0].lstrip("! ")
 				element = block_markup.Exclamation(indentation, " ".join(lines))
+			elif lines[0].startswith("* "):
+				items = [item.replace("\n", " ") for item in "\n".join(lines)[2:].split("\n*")]
+				element = block_markup.List(indentation, items)
 			elif re.match(".*::\s*$", lines[0]):
 				# Argument definition
 				argname = re.match("(.*)::\s*$", lines[0]).group(1)

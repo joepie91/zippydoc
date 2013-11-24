@@ -231,6 +231,21 @@ starting a new block.
 		$$ ####### This is a level 7 (smallest) header.
 	
 	
+^ List block
+
+	! This block cannot have child elements!
+	
+	A list block is a list containing items. In HTML, it's rendered as a bulletpoint list. Each item is prefixed with an asterisk. Items can consist of multiple lines.
+	
+	@ Using list blocks
+	
+		* This is item one.
+		* This is item three.
+		* This is item two. We can
+		  even make it continue
+		  onto the next lines.
+		* This is item four.
+	
 ^ Text block
 
 	! This block cannot have child elements!

@@ -35,6 +35,10 @@ class Text(TreeLevel):
 	def transform(self, ruleset):
 		return ruleset.transform_text(Value(self.data))
 
+class List(TreeLevel):
+	def transform(self, ruleset):
+		return ruleset.transform_list([Value(line) for line in self.data])
+
 class Exclamation(TreeLevel):
 	def transform(self, ruleset):
 		return ruleset.transform_exclamation(Value(self.data), self.transform_children(ruleset))
