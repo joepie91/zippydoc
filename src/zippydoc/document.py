@@ -43,6 +43,10 @@ class Document(object):
 				# Example
 				lines[0] = lines[0].lstrip("@ ")
 				element = block_markup.Example(indentation, " ".join(lines))
+			elif lines[0].startswith("="):
+				# Fenced section
+				lines[0] = lines[0].lstrip("= ")
+				element = block_markup.Section(indentation, " ".join(lines))
 			elif lines[0].startswith("$$") and self.current_elements[current_level].__class__.__name__ == "Code":
 				# Code continuation
 				self.current_elements[current_level].data += "\n\n" + "\n".join(lines).lstrip("$ ")

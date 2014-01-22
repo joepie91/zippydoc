@@ -14,6 +14,9 @@ class TransformationRuleset(object):
 	def transform_example(self, title, children):
 		pass
 	
+	def transform_section(self, title, children):
+		pass
+	
 	def transform_code(self, text):
 		pass
 		

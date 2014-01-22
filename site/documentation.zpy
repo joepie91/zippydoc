@@ -44,6 +44,26 @@ starting a new block.
 			
 		$$	Some kind of text describing the function goes here.
 		
+^ Fenced section
+
+	A fenced section is a section, intended for grouping together similar information. It is displayed in a "box" when outputting as HTML, and is mostly useful
+	for API and code documentation, where you would for example want to distinguish between arguments, return vales and exceptions, even if both use the
+	same "argument block" syntax (described below). To use a fenced section, you prefix the section title with an `=` (equals sign), and indent its children.
+	All child elements are treated like they normally would have been.
+	
+	@ Using a fenced section
+	
+		$ ^ my_function(**argument**, **another_argument**)
+	
+		$$ 	= Arguments
+		
+		$$		argument::
+					This is the first argument to this example function.
+					
+		$$		another_argument::
+					This is the second argument to this example function.
+					As you can see, it's possible to split the explanation over multiple lines as well.
+		
 ^ Argument block
 
 	An argument block shows a particular argument or parameter, and its explanation. The argument name is suffixed with a double colon (::), and the explanation
