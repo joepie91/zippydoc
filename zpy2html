@@ -49,6 +49,9 @@ class HtmlRuleset(zippydoc.TransformationRuleset):
 	def transform_example(self, title, children):
 		return '<div class="example">Example: %s %s</div>' % (title.transform(self), children)
 	
+	def transform_section(self, title, children):
+		return '<div class="section"><div class="title">%s</div>%s</div>' % (title.transform(self), children)
+	
 	def transform_code(self, text):
 		return '<h7>Code:</h7><pre class="code">%s</pre>' % self.escape_html(text)
 		

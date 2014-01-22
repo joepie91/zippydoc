@@ -75,6 +75,10 @@ class Argument(TreeLevel):
 class Example(TreeLevel):
 	def transform(self, ruleset):
 		return ruleset.transform_example(Value(self.data), self.transform_children(ruleset))
+
+class Section(TreeLevel):
+	def transform(self, ruleset):
+		return ruleset.transform_section(Value(self.data), self.transform_children(ruleset))
 	
 class Code(TreeLevel):
 	def transform(self, ruleset):
